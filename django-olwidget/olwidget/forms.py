@@ -153,7 +153,8 @@ def apply_maps_to_modelform_fields(fields, maps, default_options=None,
         min_pos = 65535 # arbitrarily high number for field ordering
         initial = []
         for field_name in field_list:
-            min_pos = min(min_pos, fields.keyOrder.index(field_name))
+            key_order = fields.keyOrder if hasattr(fields, "keyOrder") else list(fields)
+            min_pos = min(min_pos, key_order.index(field_name))
             field = fields.pop(field_name)
             initial.append(field_name)
             if not isinstance(field.widget, (Map, BaseVectorLayer)):
@@ -171,7 +172,10 @@ def apply_maps_to_modelform_fields(fields, maps, default_options=None,
             map_field = default_field_class(layer_fields, map_opts, layer_names=names,
                 label=", ".join(forms.forms.pretty_name(f) for f in field_list),
                 template=template)
-        fields.insert(min_pos, map_name, map_field)
+        if hasattr(fields, "insert"):
+            fields.insert(min_pos, map_name, map_field)
+        else:
+            fields[map_name] = map_field
         initial_data_keymap[map_name] = initial
     return initial_data_keymap
 
