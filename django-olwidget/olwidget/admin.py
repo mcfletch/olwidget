@@ -145,7 +145,8 @@ class GeoModelAdmin(ModelAdmin):
         ChangeList = self.get_changelist(request)
         try:
             cl = ChangeList(request, self.model, list_display, self.list_display_links, self.list_filter,
-                self.date_hierarchy, self.search_fields, self.list_select_related, self.list_per_page, self.list_editable, self)
+                self.date_hierarchy, self.search_fields, self.list_select_related, self.list_per_page,
+                self.list_max_show_all, self.list_editable, self)
         except IncorrectLookupParameters:
             # Wacky lookup parameters were given, so redirect to the main
             # changelist page, without parameters, and pass an 'invalid=1'
@@ -228,7 +229,7 @@ class GeoModelAdmin(ModelAdmin):
             'cl': cl,
             'media': media,
             'has_add_permission': self.has_add_permission(request),
-            'root_path': self.admin_site.root_path,
+            # 'root_path': self.admin_site.root_path,
             'app_label': app_label,
             'action_form': action_form,
             'actions_on_top': self.actions_on_top,
