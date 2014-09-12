@@ -175,7 +175,13 @@ def apply_maps_to_modelform_fields(fields, maps, default_options=None,
         if hasattr(fields, "insert"):
             fields.insert(min_pos, map_name, map_field)
         else:
-            fields[map_name] = map_field
+            fields_copy = fields.copy()
+            fields.clear()
+            od_pos = 0
+            for od_item in fields_copy.items():
+                if od_pos == min_pos: fields[map_name] = map_field
+                od_pos += 1
+                fields[od_item[0]] = od_item[1]
         initial_data_keymap[map_name] = initial
     return initial_data_keymap
 
