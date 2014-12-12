@@ -306,7 +306,7 @@ olwidget.Map = OpenLayers.Class(OpenLayers.Map, {
         this.selectControl = new OpenLayers.Control.SelectFeature(
             this.vectorLayers);
         this.selectControl.events.on({
-            featurehighlighted: this.featureHighlighted,ht
+            featurehighlighted: this.featureHighlighted,
             featureunhighlighted: this.featureUnhighlighted,
             scope: this
         });
