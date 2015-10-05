@@ -125,3 +125,4 @@ class GeoModelAdmin(ModelAdmin):
                 template_response.context_data['media'] += map_.media
                 template_response.context_data['map'] = map_
         return template_response
+
