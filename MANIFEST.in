@@ -1,0 +1,5 @@
+recursive-include django-olwidget *
+recursive-include css *
+recursive-include img *
+recursive-include docs *
+include COPYING.rst
